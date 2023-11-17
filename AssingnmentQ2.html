@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function isValidSudoku(board) {
+            // Check rows and columns
+            for (let i = 0; i < 9; i++) {
+              if (!isValidRow(board, i) || !isValidColumn(board, i)) {
+                return false;
+              }
+            }
+          
+            // Check 3x3 sub-boxes
+            for (let i = 0; i < 9; i += 3) {
+              for (let j = 0; j < 9; j += 3) {
+                if (!isValidSubBox(board, i, j)) {
+                  return false;
+                }
+              }
+            }
+          
+            return true;
+          }
+          
+          function isValidRow(board, row) {
+            const set = new Set();
+            for (let i = 0; i < 9; i++) {
+              const current = board[row][i];
+              if (current !== '.' && set.has(current)) {
+                return false;
+              }
+              set.add(current);
+            }
+            return true;
+          }
+          
+          function isValidColumn(board, col) {
+            const set = new Set();
+            for (let i = 0; i < 9; i++) {
+              const current = board[i][col];
+              if (current !== '.' && set.has(current)) {
+                return false;
+              }
+              set.add(current);
+            }
+            return true;
+          }
+          
+          function isValidSubBox(board, startRow, startCol) {
+            const set = new Set();
+            for (let i = 0; i < 3; i++) {
+              for (let j = 0; j < 3; j++) {
+                const current = board[startRow + i][startCol + j];
+                if (current !== '.' && set.has(current)) {
+                  return false;
+                }
+                set.add(current);
+              }
+            }
+            return true;
+          }
+          
+          // Example usage:
+          const sudokuBoard = [
+            ['5', '3', '.', '.', '7', '.', '.', '.', '.'],
+            ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
+            ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
+            ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
+            ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
+            ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
+            ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
+            ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+            ['.', '.', '.', '.', '8', '.', '.', '7', '9'],
+          ];
+          
+          console.log(isValidSudoku(sudokuBoard)); // Output: true
+    </script>
+</body>
+</html>

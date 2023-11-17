@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const customers = [
+        { customerID: 1, customerName: 'John', totalBillingAmount: 2500 },
+        { customerID: 2, customerName: 'Jane', totalBillingAmount: 3200 },
+        { customerID: 3, customerName: 'Bob', totalBillingAmount: 2800 },
+        { customerID: 4, customerName: 'Alice', totalBillingAmount: 3500 },
+        ];
+
+// Filter customers with totalBillingAmount > 3000 and map to required information
+const selectedCustomers = customers
+  .filter(customer => customer.totalBillingAmount > 3000)
+  .map(customer => ({
+    customerName: customer.customerName,
+    purchaseDetails: {
+      customerID: customer.customerID,
+      totalBillingAmount: customer.totalBillingAmount,
+    },
+  }));
+
+// Print the result
+selectedCustomers.forEach(customer => {
+  console.log(`Customer Name: ${customer.customerName}`);
+  console.log('Purchase Details:', customer.purchaseDetails);
+  console.log('---');
+});
+    </script>
+</body>
+</html>
